@@ -1,0 +1,99 @@
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Car Workshop</title>
+    <script>
+
+        window.addEvent('domready', function(){
+            new Picker.Date($$('INPUT'), {
+                timePicker: true,
+                positionOffset: {x: 5, y: 0},
+                pickerClass: 'datepicker_bootstrap',
+                useFadeInOut: !Browser.ie
+            });
+        });
+    
+        </script>
+    
+    
+</head>
+<body>
+    <header>
+        <div class="hero">
+          <h1 style="text-align:center" >Fill up the Form</h1>
+         
+          <style>
+            .showhideForm{
+                display: none;
+                width: 300px;
+                border: 1px solid #ccc;
+                padding: 14px;
+                background: #ececec;
+            }	
+            </style>
+            
+             <div class="container"; id="container">
+            
+             </br>
+             
+            <form  action="customer.php" method="POST">
+                <label> Name</label>
+                <input type="text" name="name" placeholder="Enter your name"/><br>
+                </br>
+                <label> Address</label>
+                <input type="text" name="address" placeholder="Enter your address"/><br>
+                </br>
+                <label> Phone no.</label>
+                <input type="number" name="number" placeholder="Enter your phone no."/><br>
+                </br>
+                <label> Car License Number</label>
+                <input type="number" name="license" placeholder="Enter your car license number"/><br>
+                </br>
+                <label> Car Engine Number</label>
+                <input type="number" name="engine" placeholder="Enter your car engine number"/><br>
+                </br>
+               
+                </br> 
+               
+                <input type="submit" name="save" value="Submit"/> 
+            </form>
+          <?php
+         
+          $date = $_POST['date'];
+          $server_name="localhost";
+            $username="root";
+            $password="";
+            $database_name="assignment3";
+            mysqli_connect($server_name,$username,$password,$database_name);
+            $sql="SELECT * FROM mechatable WHERE bookdate !="$date";
+            $result=mysqli_query($sql) or die(mysqli_error());
+            while($row=mysqli_fetch_array($result))
+            {
+
+          ?>
+           
+            <form id="book" action="/customer.php" method="POST">
+                <label>Please select mechanic:</label>
+                
+                        <select name="mechanic">
+                            <option ></option>
+                          
+                        </select>
+                        
+           </form>    
+           <?php
+            }
+           ?>     
+                         
+                
+               
+            
+            
+           </div>
+        </header>
+        </div>
+</body>
+</html>
